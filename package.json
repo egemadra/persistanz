@@ -22,6 +22,12 @@
     "Postgres",
     "Sqlite3"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/egemadra/persistanz.git"
+  },
+  "homepage": "http://persistanz.34bit.net/"
+  ,
   "bugs": {
     "email": "egemadra@gmail.com"
   },

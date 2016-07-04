@@ -39,10 +39,10 @@ pers.create().then(function(){ //3
 * Models are standard constructor functions and can be as simple as ```function Customer(){}```.
 * Single table inheritance.
 * Transaction support.
-* ["Field abstraction over affix"](persistanz.34bit.net/#field-abstraction-over-affix)
+* ["Field abstraction over affix"](http://persistanz.34bit.net/#field-abstraction-over-affix)
 * Many to many mappings in queries (partial support)
-* Has a handsome [documenation web site](persistanz.34bit.net/) which covers the full functionality.
-* [Has functional tests](persistanz.34bit.net/#tests)
+* Has a handsome [documenation web site](http://persistanz.34bit.net/) which covers the full functionality.
+* [Has functional tests](http://persistanz.34bit.net/#tests)
 
 As of this version, persistanz doesn't have support for the following, some of which is commonly found in orm software:
 
@@ -173,7 +173,7 @@ var aPromise=pers.q().f("Customer").s("id, name, orders.*").exec();
 
 ## Documentation
 
-Persistanz has a terrific documentation website where every feature is documented with code samples. Head over to the [persistanz.34bit.net](persistanz.34bit.net)
+Persistanz has a terrific documentation website where every feature is documented with code samples. Head over to the [persistanz.34bit.net](http://persistanz.34bit.net)
 
 ## Version history
 
