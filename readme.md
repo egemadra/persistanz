@@ -177,7 +177,12 @@ Persistanz has a terrific documentation website where every feature is documente
 
 ## Version history
 
-### 0.2.0 Beta 2016-07-04
+### 0.2.1 2016-07-05
+
+- .hydrate() and .hydrateX() methods added.
+- .loadById() was not working with a callback, fixed.
+
+### 0.2.0 2016-07-04 (now beta)
 
 - Now in beta.
 - any-db is removed from dependencies, and replaced with custom adapters.
