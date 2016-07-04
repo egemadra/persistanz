@@ -1,0 +1,30 @@
+{
+  "name": "persistanz",
+  "version": "0.2.0",
+  "description": "Object relational mapping library with unique features.",
+  "main": "./lib/Persistanz.js",
+  "dependencies": {
+    "co": "^4.6.0"
+  },
+  "devDependencies": {
+    "mysql": "^2.11.1",
+    "pg": "^6.0.1",
+    "sqlite3": "^3.1.4"
+  },
+  "scripts": {
+    "test": "node ./tests.1js"
+  },
+  "keywords": [
+    "Object Relational Mapping",
+    "ORM",
+    "SQL",
+    "MySQL",
+    "Postgres",
+    "Sqlite3"
+  ],
+  "bugs": {
+    "email": "egemadra@gmail.com"
+  },
+  "author": "Ege Madra <egemadra@gmail.com>",
+  "license": "MIT"
+}
