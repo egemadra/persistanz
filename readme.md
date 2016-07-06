@@ -177,6 +177,10 @@ Persistanz has a terrific documentation website where every feature is documente
 
 ## Version history
 
+### 0.3.0 2016-07-06
+
+- .toMany() method added. This allows a very flexible many-to-many queries.
+
 ### 0.2.1 2016-07-05
 
 - .hydrate() and .hydrateX() methods added.
