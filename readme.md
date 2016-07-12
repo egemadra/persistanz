@@ -40,7 +40,7 @@ pers.create().then(function(){ //3
 * Single table inheritance.
 * Transaction support.
 * ["Field abstraction over affix"](http://persistanz.34bit.net/#field-abstraction-over-affix)
-* Many to many mappings in queries (partial support)
+* Many to many mappings in queries.
 * Has a handsome [documenation web site](http://persistanz.34bit.net/) which covers the full functionality.
 * [Has functional tests](http://persistanz.34bit.net/#tests)
 
@@ -176,6 +176,11 @@ var aPromise=pers.q().f("Customer").s("id, name, orders.*").exec();
 Persistanz has a terrific documentation website where every feature is documented with code samples. Head over to the [persistanz.34bit.net](http://persistanz.34bit.net)
 
 ## Version history
+
+### 0.3.1 2016-07-12
+
+- Fixed: .insert and .insertAs was causing the wrong primary key in the mapped object if the column is not a numeric/auto-increment type.
+- Minor fixes in error messages, jsdoc corrections.
 
 ### 0.3.0 2016-07-06
 

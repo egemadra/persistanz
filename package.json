@@ -1,7 +1,7 @@
 {
   "name": "persistanz",
-  "version": "0.2.1",
-  "description": "Object relational mapping library with unique features.",
+  "version": "0.3.1",
+  "description": "Object relational mapping (ORM) library with unique features.",
   "main": "./lib/Persistanz.js",
   "dependencies": {
     "co": "^4.6.0"
