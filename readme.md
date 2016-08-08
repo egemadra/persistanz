@@ -177,6 +177,11 @@ Persistanz has a terrific documentation website where every feature is documente
 
 ## Version history
 
+### 0.4.0 2016-08-08
+
+- Added "afterLoad" hook to models.
+- Tabs are replaced with the spaces in the source code.
+
 ### 0.3.1 2016-07-12
 
 - Fixed: .insert and .insertAs was causing the wrong primary key in the mapped object if the column is not a numeric/auto-increment type.
