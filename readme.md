@@ -177,6 +177,10 @@ Persistanz has a terrific documentation website where every feature is documente
 
 ## Version history
 
+### 0.4.1 2016-08-10
+
+- Fixed: deleteById and deleteByIdX was broken when called as static on models.
+
 ### 0.4.0 2016-08-08
 
 - Added "afterLoad" hook to models.
