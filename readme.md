@@ -177,6 +177,10 @@ Persistanz has a terrific documentation website where every feature is documente
 
 ## Version history
 
+### 0.4.2 2016-08-25
+
+- Fixed: Inserts and updates were failing when an object had its toMany fields were set.
+
 ### 0.4.1 2016-08-10
 
 - Fixed: deleteById and deleteByIdX was broken when called as static on models.
