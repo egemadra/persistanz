@@ -177,7 +177,7 @@ Persistanz has a terrific documentation website where every feature is documente
 
 ## Version history
 
-## 0.5.0 2016-12-49
+## 0.5.0 2016-12-19
 
 - Major refactoring of code base, which was a bit too complicated.
 - Schema analysis is delegated to [schemax](https://www.npmjs.com/package/schemax).
