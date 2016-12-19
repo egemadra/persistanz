@@ -1,0 +1,11 @@
+TODO:
+- Enforce that column names cannot contain commas, table names neither commas nor dots. We split by comma everywhere.
+- getSql() on pers and persQuery. Deprecate getQuery() and replace it with getSql().
+- adapter refactoring needed. They still don't support callbacks.
+- map refactoring and optimization.
+- exec() refactoring and optimization.
+- presistanz refactoring to remove _() stuff.
+- selectDelete(), multiUpdate()
+- serializations: value-map type. Validation.
+- unwanted field removal.
+- MSSQL support. (linux support is avaiable now.)
