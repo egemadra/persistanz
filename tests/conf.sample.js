@@ -21,7 +21,7 @@ module.exports={
     }
   },
 
-  applyTestsTo:[ //uncomment lines to disable tests.
+  applyTestsTo:[ //comment out lines to disable tests.
     "sqlite3",
     "mysql",
     "postgres",

@@ -1,5 +1,4 @@
 "use strict";
-var pc=require("../lib/common.js").pc;
 var co=require("co");
 var Persistanz=require("../lib/Persistanz.js");
 var prepare=require("./attic/prepare.js");

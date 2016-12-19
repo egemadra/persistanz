@@ -1,5 +1,4 @@
 "use strict";
-var pc=require("../lib/common.js").pc;
 var co=require("co");
 var Persistanz=require("../lib/Persistanz.js");
 var prepare=require("./attic/prepare.js");
@@ -233,6 +232,7 @@ co(function*(){
   }
 }).catch(function(err){
   console.log("err in 1.js: ", err);
+  console.log(err.stack);
   try{
     pers.destroy();
   }

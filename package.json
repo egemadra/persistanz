@@ -1,10 +1,11 @@
 {
   "name": "persistanz",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Object relational mapping (ORM) library with unique features.",
   "main": "./lib/Persistanz.js",
   "dependencies": {
-    "co": "^4.6.0"
+    "co": "^4.6.0",
+    "schemax": "^0.1.0"
   },
   "devDependencies": {
     "mysql": "^2.11.1",
@@ -26,8 +27,7 @@
     "type": "git",
     "url": "https://github.com/egemadra/persistanz.git"
   },
-  "homepage": "http://persistanz.34bit.net/"
-  ,
+  "homepage": "http://persistanz.34bit.net/",
   "bugs": {
     "email": "egemadra@gmail.com"
   },

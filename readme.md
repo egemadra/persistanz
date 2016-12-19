@@ -1,6 +1,6 @@
 # Persistanz
 
-Persistanz is a simple object relational mapping (ORM) library for SQL databases with unique features, where the main emphasis is on rapid development.
+Persistanz is an ORM library for node with unique features, where the main emphasis is on developer productivity.
 
 It is written in javascript and works on node.js.
 
@@ -38,34 +38,34 @@ pers.create().then(function(){ //3
 * Respects your classes and queries. Doesn't force you to extend or decorate your models.
 * Models are standard constructor functions and can be as simple as ```function Customer(){}```.
 * Single table inheritance.
+* Custom column serialization.
 * Transaction support.
 * ["Field abstraction over affix"](http://persistanz.34bit.net/#field-abstraction-over-affix)
 * Many to many mappings in queries.
 * Has a handsome [documenation web site](http://persistanz.34bit.net/) which covers the full functionality.
-* [Has functional tests](http://persistanz.34bit.net/#tests)
+* [Has integration tests](http://persistanz.34bit.net/#tests)
 
-As of this version, persistanz doesn't have support for the following, some of which is commonly found in orm software:
-
-* Arbitrary "has-many", "belongs-to" configurations. All such things are based on foreign keys as of now. Maybe.
-* Caching. Maybe.
-* Deep object inserts or updates. (Saving objects along with the parent/child objects) Maybe.
 
 ## Is it good for me?
 
-This is an opinionated package that aims to simplify and leverage the common database usage scenarios. It expects to be able to understand the relations between tables by looking at the schema, so the more your schema makes sense, the more this library is useful to you and you write less code.
+This is a bit of an opinionated package that aims to simplify and leverage the common database usage scenarios. It expects to be able to understand the relations between tables by looking at the schema, so the more your schema makes sense, the more this library is useful to you and you write less code.
 
 <aside class="notice">
-If you do any following, you probably won't like persistanz, because even with configuration they are not possible to fix:
+If you do any following, some or all parts of the library won't work, because even with configuration they are not supported:
 <br /><br />
 - You don't define primary keys for your tables.<br />
 - You don't define foreign keys on database level and "has-many", "belongs-to" relations are only in your mind and code. (That means no MyISAM tables).<br />
-- You do unusual stuff like mapping foreign keys to columns in more than one table, or non-primary-key columns.<br />
-- You do arbitrary and custom connections using JOINs not involving foreign keys and/or primary keys.
+- You do unusual stuff like referencing more than one table with the same foreign key, or referencing non-primary-key columns.<br />
+- You use composite primary and foreign keys.<br />
+- You do arbitrary and custom connections using JOINs not involving foreign keys and/or primary keys.<br />
+- Your table and column names contain commas or dots.
 </aside>
+
+Also, unlike some other ORM libraries, it expects you to know basic SQL as SQL building methods are very thin wrappers on actual SQL syntax and they resemble them significantly.
 
 ## Status and development
 
-Currently in beta stage. I am actively working on this project as I need to use it myself. If you have any ideas, bug reports please contact me at egemadra@gmail.com
+Currently in beta stage. I am actively working on this project as I am currently using it in a non-trivial project. If you have any ideas, bug reports please open an issue or pull request on github.
 
 ## Installation
 
@@ -176,6 +176,28 @@ var aPromise=pers.q().f("Customer").s("id, name, orders.*").exec();
 Persistanz has a terrific documentation website where every feature is documented with code samples. Head over to the [persistanz.34bit.net](http://persistanz.34bit.net)
 
 ## Version history
+
+## 0.5.0 2016-12-49
+
+- Major refactoring of code base, which was a bit too complicated.
+- Schema analysis is delegated to [schemax](https://www.npmjs.com/package/schemax).
+- More robust handling of errors in Persistanz.create(). Most incompatibilities are reported.
+- Multiple bridge field and toMany field definitions are now allowed to accommodate better single table inheritance.
+- Bridge and toMany fields' models must be defined.
+- BREAKING: Bridge field and toMany field definition syntax in the options have changed.
+- FIX: saveAs, and saveAsX was throwing instead of returning errors when callback is provided.
+- PersQuery.index() now can accept a callback function as its argument, which is passed a mapped object.
+- BREAKING: PersQuery.getQuery() now returns an object {sql: the query with placeholders, values: [to replace placeholders]}.
+- More than one abstract affix can be set now.
+- FIX: X functions correctly fail when the tx object is omitted or not a PersTransaction object.
+- PersQuery.one() method added.
+- FIX: hydrate() and hydrateX were broken and not copying affix-abstracted fields.
+- .limit() and having() have now a second argument, which is escaped and replaces a ? symbol.
+- .where(), limit() and having() can be called with a tagged string template.
+- .where() string template values can be arrays or PersQuery instances too.
+- BREAKING: Undocumented subquery replacement feature in .where() values is removed and moved to tagged templates.
+- Persistanz.getConfigSummary() method added.
+- Persistanz.modelMeta property is added (exposed).
 
 ### 0.4.2 2016-08-25
 

@@ -1,7 +1,7 @@
 "use strict";
 const fs=require("fs");
 const co=require("co");
-const common=require("../../lib/common.js");
+const helper=require("../../lib/helper.js");
 
 module.exports={
   createTestDatabase,
@@ -13,11 +13,14 @@ function createTestDatabase(config)
     switch(config.adapter)
     {
       case 'sqlite3':
-        var r=fs.unlinkSync(config.database);
+        try {
+          var r=fs.unlinkSync(config.database);
+        }
+        catch (err) {};
         var sqlite3 = require('sqlite3').verbose();
         var db = new sqlite3.Database(config.database);
         var sqls=fs.readFileSync(__dirname+"/sqlite3.sql", "utf8");
-        yield common.pc(db.exec, db, [sqls]);
+        yield helper.promisifyCall(db.exec, db, [sqls]);
         db.close();
         return;
       case 'mysql':
@@ -27,12 +30,12 @@ function createTestDatabase(config)
         delete copyConf.database;
         copyConf.multipleStatements=true; //so that we can create the db in one go.
         var connection = mysql.createConnection(copyConf);
-        yield common.pc(connection.connect, connection);
-        yield common.pc(connection.query, connection, ["DROP DATABASE IF EXISTS `"+db+"`"]);
-        yield common.pc(connection.query, connection, ["CREATE DATABASE `"+db+"`"]);
-        yield common.pc(connection.changeUser, connection, [{database:db}]);
+        yield helper.promisifyCall(connection.connect, connection);
+        yield helper.promisifyCall(connection.query, connection, ["DROP DATABASE IF EXISTS `"+db+"`"]);
+        yield helper.promisifyCall(connection.query, connection, ["CREATE DATABASE `"+db+"`"]);
+        yield helper.promisifyCall(connection.changeUser, connection, [{database:db}]);
         var sqls=fs.readFileSync(__dirname+"/mysql.sql", "utf8");
-        yield common.pc(connection.query, connection, [sqls]);
+        yield helper.promisifyCall(connection.query, connection, [sqls]);
         connection.end();
         return;
       case 'postgres':
@@ -42,12 +45,12 @@ function createTestDatabase(config)
         delete copyConf.database;
         copyConf.database="template1";
         var client = new pg.Client(copyConf);
-        yield common.pc(client.connect, client);
+        yield helper.promisifyCall(client.connect, client);
         yield client.query('DROP DATABASE IF EXISTS "'+db+'"');
         yield client.query('CREATE DATABASE "'+db+'" ENCODING '+" 'UTF8'");
         client.end();
         client=new pg.Client(config);
-        yield common.pc(client.connect, client);
+        yield helper.promisifyCall(client.connect, client);
         var sqls=fs.readFileSync(__dirname+"/postgres.sql", "utf8");
         yield client.query(sqls);
         client.end();

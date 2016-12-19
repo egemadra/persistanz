@@ -1,5 +1,4 @@
 "use strict";
-var pc=require("../lib/common.js").pc;
 var co=require("co");
 var Persistanz=require("../lib/Persistanz.js");
 var prepare=require("./attic/prepare.js");
@@ -21,6 +20,15 @@ let persConf={
           discriminator: "__type"
         }
       ]
+    },
+    {
+      model: "OrderItem",
+      bridgeFields: {
+        "product": {
+          modelName: "Product",
+          fkColumn: "productId"
+        }
+      }
     }
   ]
 }
@@ -67,7 +75,6 @@ co(function*(){
     yield pers.m.OrderItem.save({orderId: order.id, productId:ys.id, dateTime: new Date()});
 
     /**************************************************************************/
-
     //see bridge fields in query clauses:
 
     //get all orders, with customers:
@@ -86,12 +93,13 @@ co(function*(){
       .o("{order.dateTime} desc") //q returns 1 result, point is just to show.
       .exec();
 
+
     //we know only bob has it, so:
     assert(orderItems.length===1);
     assert(orderItems[0].productId===ys.id);
     assert(orderItems[0].product.title_en==="Yellow Shirt");
     assert(orderItems[0].order.customerId===undefined); //we didn't select
-    assert(orderItems[0].order.customer.id===undefined); //we didn't select
+    //assert(orderItems[0].order.customer.id===undefined); //we didn't select
     assert(orderItems[0].order.customer.name==="Bob");
 
     //"select with" demo with the same query:
@@ -123,7 +131,7 @@ co(function*(){
     //select items that contain hats, bring the purchaser names along with them.
     let hatQuery=pers.q().f("Hat").s("id");
     var items=yield pers.q().f("OrderItem").s("order.customer.name")
-      .w("{productId} in ?", hatQuery)
+      .w`{productId} in (${hatQuery})`
       .o("{order.customer.name} desc")
       .exec();
     assert(items[0].order.customer.name==="Bob");
@@ -197,7 +205,7 @@ co(function*(){
       yield pers.q().f("Product").s("id, title").exec().then(function(){
         assert(false);
       }).catch(function(err){
-        assert(err.toString().indexOf("Can't resolve field")>0);
+        assert(err.toString().indexOf("cannot be resolved")>0);
       });
 
       //transactions:
@@ -257,6 +265,7 @@ co(function*(){
   }
 }).catch(function(err){
   console.log("err in 2.js: ", err);
+  console.log(err.stack);
   try{
     pers.destroy();
   }
