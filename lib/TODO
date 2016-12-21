@@ -9,3 +9,5 @@ TODO:
 - serializations: value-map type. Validation.
 - unwanted field removal.
 - MSSQL support. (linux support is avaiable now.)
+- Unfixable errors are thrown before automatic bridge/toMany field generation. This makes the library unusable even with a single error.
+    Check if auto generation routines can work with those errors present.

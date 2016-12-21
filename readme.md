@@ -177,6 +177,9 @@ Persistanz has a terrific documentation website where every feature is documente
 
 ## Version history
 
+## 0.5.1 2016-12-21
+- FIX: Previous release caused config-fixable Persistanz.create() errors to prevent library from functioning.
+
 ## 0.5.0 2016-12-19
 
 - Major refactoring of code base, which was a bit too complicated.

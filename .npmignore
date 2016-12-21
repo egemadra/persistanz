@@ -1,6 +1,6 @@
 .tern-project
 test.js
 tests/conf.js
+test
 .hgignore
 .hg
-
