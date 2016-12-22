@@ -177,6 +177,9 @@ Persistanz has a terrific documentation website where every feature is documente
 
 ## Version history
 
+## 0.5.2 2016-12-22
+- FIX: .one(), when called on .toMany() was broken and wrongly operating on the child query instead of parent.
+
 ## 0.5.1 2016-12-21
 - FIX: Previous release caused config-fixable Persistanz.create() errors to prevent library from functioning.
 
