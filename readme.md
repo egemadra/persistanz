@@ -177,6 +177,11 @@ Persistanz has a terrific documentation website where every feature is documente
 
 ## Version history
 
+## 0.5.3 2016-12-28
+- FIX: missing PersQuery.from() clause didn't report it correctly and failed elsewhere. (introduced in v0.5)
+- FIX: PersQuery.build().exec() was failing because the library was trying to build the query again. (introduced in v0.5)
+- FIX: chained .toMany() queries failing as the reference point was not reset back to the root query. (introduced in v0.5)
+
 ## 0.5.2 2016-12-22
 - FIX: .one(), when called on .toMany() was broken and wrongly operating on the child query instead of parent.
 
