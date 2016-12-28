@@ -177,6 +177,9 @@ Persistanz has a terrific documentation website where every feature is documente
 
 ## Version history
 
+## 0.5.6 2016-12-28
+- FIX: deserialization was broken in certain cases when reading from db.
+
 ## 0.5.5 2016-12-28
 - FIX: Coding error resulted in broken SQL generation when discriminator and possible toMany fields are involved. (introduced in v0.5)
 - FIX: discriminator field wasn't escaped when a subquery used in the .from().
