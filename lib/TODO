@@ -8,13 +8,24 @@ TODO:
 - selectDelete(), multiUpdate()
 - serializations: value-map type. Validation.
 - unwanted field removal.
-- MSSQL support. (linux support is avaiable now.)
+- MSSQL support. (linux support for MSSQL is available now.)
 - Unfixable errors are thrown before automatic bridge/toMany field generation. This makes the library unusable even with a single error.
-    Check if auto generation routines can work with those errors present.
+    Check if auto generation routines can work with those errors present. Also consider user defined suppression, as this maybe useful
+    in cases where a library requires its own tables in the user's database which the user won't access it in their code.
 - When a table is used as a generic key-value store with different models, foreign keys referring to this table causing generation of
     irrelevant toMany fields for each of the submodels. Moreover, if one the submodels have two references to the generic table pers.create()
     throws "toMany field causing name collision error" for EVERY submodel. Investigate the issue and prepare a fix like "don't generate
     toMany fields for these.".
+- Likewise, when pers throws because of multiple possible models exist for a a given fk, consider generating a bridge field only for those
+    models whose name is matching the generated bf name. For example, from a generic table that is used as key-value store who has multiple
+    sub models, pers cannot create bridge fields. But most of them are irrelevant anyway. If a submodel is ShipType, and Ship table has shipTypeId
+    column, there is no need to produce foreign keys for other XType models as they would be irrelevant and unncessarily forces the user
+    to define meaningless bridge fileds for models which they won't use anyway.
 - insert as doesn't set the primary key of the .object property even with the autoincrement id. if insert is successful it should
     always assing the pk. check for save as too.
 - ignoreTables: [tableName, tableName...] option in the config to ensure errors not thrown for the tables we don't want to use.
+- There is no way to escape curly braces in selectAlias(). Find a way.
+- Consider _code, Code, _Code, endings as fk descriptors and generate bridge field names from the column name. This would solve potentially
+    quite a lot of cases where primary keys are meaningful (Country, Currency, Product, Language or anything that can have a user defined
+    "code".)
+- pluralize table names that end with "y" or "i" as "ies" in toMany field generation.
