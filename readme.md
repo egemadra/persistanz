@@ -177,6 +177,13 @@ Persistanz has a terrific documentation website where every feature is documente
 
 ## Version history
 
+## 0.5.7 2016-12-30
+
+- FIX: Insert operations didn't update the pk value of object if pk column was not auto-increment.
+- POSSIBLY BREAKING: An insert operation throws if pk column is not auto-increment and pk field is not set.
+- POSSIBLY BREAKING: .lastInsertId now always shows the inserted value instead of what the db returned.
+- POSSIBLY BREAKING: Insert operations now always update the object's pk.
+
 ## 0.5.6 2016-12-28
 - FIX: deserialization was broken in certain cases when reading from db.
 

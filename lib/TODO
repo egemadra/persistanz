@@ -21,8 +21,6 @@ TODO:
     sub models, pers cannot create bridge fields. But most of them are irrelevant anyway. If a submodel is ShipType, and Ship table has shipTypeId
     column, there is no need to produce foreign keys for other XType models as they would be irrelevant and unncessarily forces the user
     to define meaningless bridge fileds for models which they won't use anyway.
-- insert as doesn't set the primary key of the .object property even with the autoincrement id. if insert is successful it should
-    always assing the pk. check for save as too.
 - ignoreTables: [tableName, tableName...] option in the config to ensure errors not thrown for the tables we don't want to use.
 - There is no way to escape curly braces in selectAlias(). Find a way.
 - Consider _code, Code, _Code, endings as fk descriptors and generate bridge field names from the column name. This would solve potentially
