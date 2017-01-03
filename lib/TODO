@@ -27,3 +27,6 @@ TODO:
     quite a lot of cases where primary keys are meaningful (Country, Currency, Product, Language or anything that can have a user defined
     "code".)
 - pluralize table names that end with "y" or "i" as "ies" in toMany field generation.
+- _save() doesn't deserialize pk column, this is a mistake.
+- make getTransaction() callbacks so that the txOptions parameters can be ignored and callback fn can be the first param.
+- loadById() too, in callback mode, currently it is necessary to put the "select" argument.

@@ -1,11 +1,11 @@
 {
   "name": "persistanz",
-  "version": "0.5.7",
+  "version": "0.5.8",
   "description": "Object relational mapping (ORM) library with unique features.",
   "main": "./lib/Persistanz.js",
   "dependencies": {
     "co": "^4.6.0",
-    "schemax": "^0.1.0"
+    "schemax": "^0.1.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",
