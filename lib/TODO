@@ -21,12 +21,21 @@ TODO:
     sub models, pers cannot create bridge fields. But most of them are irrelevant anyway. If a submodel is ShipType, and Ship table has shipTypeId
     column, there is no need to produce foreign keys for other XType models as they would be irrelevant and unncessarily forces the user
     to define meaningless bridge fileds for models which they won't use anyway.
-- ignoreTables: [tableName, tableName...] option in the config to ensure errors not thrown for the tables we don't want to use.
 - There is no way to escape curly braces in selectAlias(). Find a way.
 - Consider _code, Code, _Code, endings as fk descriptors and generate bridge field names from the column name. This would solve potentially
     quite a lot of cases where primary keys are meaningful (Country, Currency, Product, Language or anything that can have a user defined
     "code".)
-- pluralize table names that end with "y" or "i" as "ies" in toMany field generation.
+- pluralize table names that end with "y" as "ies" in toMany field generation.
 - _save() doesn't deserialize pk column, this is a mistake.
 - make getTransaction() callbacks so that the txOptions parameters can be ignored and callback fn can be the first param.
 - loadById() too, in callback mode, currently it is necessary to put the "select" argument.
+- ignoreTables documentation.
+
+changes:
+- ignoreTables config option.
+- Code cleanup minor adjustments.
+- Persistanz.getConfigSummary() lists ignored tables.
+- FIX: if a model in config defined as a function, it was throwing due to some old code remained in v0.5 refactoring.
+- FIX: extend = false config option is now respected for auto-generated models too.
+- FIX: PersQuery.one() method now returns null instead of undefined when query returned an empty result set.
+- REMOVED: Persistanz.escape() was deprecated and now removed.
