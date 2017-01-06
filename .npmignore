@@ -1,9 +1,7 @@
-.tern-project
+
 test.js
-tests/conf.js
-test
-tests/test2
-.hgignore
-.hg
-.nyc_output
 coverage
+.nyc_output
+.tern-project
+tests
+test/conf/db-config.js

@@ -1,5 +1,7 @@
 # Persistanz
 
+[![Build Status](https://travis-ci.org/egemadra/persistanz.svg?branch=master)](https://travis-ci.org/egemadra/persistanz) [![Coverage Status](https://coveralls.io/repos/github/egemadra/persistanz/badge.svg?branch=master)](https://coveralls.io/github/egemadra/persistanz?branch=master)
+
 Persistanz is an ORM library for node with unique features, where the main emphasis is on developer productivity.
 
 It is written in javascript and works on node.js.

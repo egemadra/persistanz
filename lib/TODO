@@ -9,9 +9,6 @@ TODO:
 - serializations: value-map type. Validation.
 - unwanted field removal.
 - MSSQL support. (linux support for MSSQL is available now.)
-- Unfixable errors are thrown before automatic bridge/toMany field generation. This makes the library unusable even with a single error.
-    Check if auto generation routines can work with those errors present. Also consider user defined suppression, as this maybe useful
-    in cases where a library requires its own tables in the user's database which the user won't access it in their code.
 - When a table is used as a generic key-value store with different models, foreign keys referring to this table causing generation of
     irrelevant toMany fields for each of the submodels. Moreover, if one the submodels have two references to the generic table pers.create()
     throws "toMany field causing name collision error" for EVERY submodel. Investigate the issue and prepare a fix like "don't generate
@@ -30,6 +27,8 @@ TODO:
 - make getTransaction() callbacks so that the txOptions parameters can be ignored and callback fn can be the first param.
 - loadById() too, in callback mode, currently it is necessary to put the "select" argument.
 - ignoreTables documentation.
+- documentation references tests, but they changed, update.
+- test documenation change.
 
 changes:
 - ignoreTables config option.

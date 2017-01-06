@@ -1,7 +1,7 @@
-test.js
-.hg
-.hgignore
-.tern-project
-tests/conf.js
-tests/testdb
 node_modules
+test.js
+coverage
+.nyc_output
+.tern-project
+tests
+test/conf/db-config.js
