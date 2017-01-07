@@ -195,34 +195,26 @@ describe("Select queries without a configuration", function(done) {
 
       //this is failing for postgres, because the builder adds customer.id into the select clause
       //and postgres doesn't like non-aggregated columns from non-group in the query.
-      if (adapterName != 'postgres') {
-        it("group by", function * () {
-          var orders =  yield pers.q().f("Order").s("*, customer.name")
-            .g("{customer.name}").exec();
+      it("group by", function * () {
+        var orders =  yield pers.q().f("Order").sa("{customer.name}")
+          .g("{customer.name}").exec();
 
-          assert(orders.length === 2, "One order from each customer means 2.");
-        });
+        assert(orders.length === 2, "One order from each customer means 2.");
+      });
 
-        it("having, normal method call", function * () {
-          var orders = yield  pers.q().f("Order").s("customer.name")
-            .g("{customer.name}").h("{customer.name} = ?", "Darth Vader").exec();
-          assert(orders.length === 1, "Only 1 customer should be in the results.");
-          assert(orders[0].customer.name === 'Darth Vader', "and that is Darth Vader.");
-        });
+      it("having, normal method call", function * () {
+        var orders = yield  pers.q().f("Order").sa("{customer.name} as name")
+          .g("{customer.name}").h("{customer.name} = ?", "Darth Vader").exec();
+        assert(orders.length === 1, "Only 1 customer should be in the results.");
+        assert(orders[0].name === 'Darth Vader', "and that is Darth Vader.");
+      });
 
-        it("having, tagged template call", function * () {
-          var orders = yield  pers.q().f("Order").s("customer.name")
-            .g("{customer.name}").h`{customer.name} = ${"Darth Vader"}`.exec();
-          assert(orders.length === 1, "Only 1 customer should be in the results.");
-          assert(orders[0].customer.name === 'Darth Vader', "and that is Darth Vader.");
-        });
-
-
-      } else {
-        it("groupby for postgres");
-        it("having for postgres");
-      }
-
+      it("having, tagged template call", function * () {
+        var orders = yield  pers.q().f("Order").sa("{customer.name} as name")
+          .g("{customer.name}").h`{customer.name} = ${"Darth Vader"}`.exec();
+        assert(orders.length === 1, "Only 1 customer should be in the results.");
+        assert(orders[0].name === 'Darth Vader', "and that is Darth Vader.");
+      });
 
       it("streaming queries", function * () {
         var called = 0;
