@@ -19,7 +19,6 @@ TODO:
     column, there is no need to produce foreign keys for other XType models as they would be irrelevant and unncessarily forces the user
     to define meaningless bridge fileds for models which they won't use anyway.
 - There is no way to escape curly braces in selectAlias(). Find a way.
-- _save() doesn't deserialize pk column, this is a mistake.
 - make getTransaction() callbacks so that the txOptions parameters can be ignored and callback fn can be the first param.
 - loadById() too, in callback mode, currently it is necessary to put the "select" argument.
 - ignoreTables documentation.
@@ -29,12 +28,13 @@ TODO:
 
 changes:
 - ignoreTables config option.
-- Code cleanup minor adjustments.
-- Proper integration test suite, Travis-CI (for tests) and coveralls.
-- Persistanz.getConfigSummary() lists ignored tables.
 - Bridge field name generation now checks for _Code, _code and Code endings too.
 - BREAKING: toMany field names with "-ies" ending for tables whose names end with a "y".
+- Proper integration test suite, Travis-CI (for tests) and coveralls.
+- Persistanz.getConfigSummary() lists ignored tables.
+- Code cleanup and minor adjustments.
 - FIX: if a model in config defined as a function, it was throwing due to some old code remained in v0.5 refactoring.
 - FIX: extend = false config option is now respected for auto-generated models too.
-- FIX: PersQuery.one() method now returns null instead of undefined when query returned an empty result set.
+- FIX: PersQuery.one() method now returns null instead of undefined when the query returns an empty set.
+- FIX: Inserts and update weren't serializing discriminator and [de]serializing the pk.
 - REMOVED: Persistanz.escape() was deprecated and now removed.
