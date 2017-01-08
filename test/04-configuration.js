@@ -485,14 +485,6 @@ describe("Configuration and hooks", function(done) {
                 }
               ]
             },
-            { //prevent OrderItem to throw due to multiple product bfs:
-              model: "OrderItem",
-              bridgeFields: {
-                product: {modelName: "Product", fkColumn: "productId"},
-                hat: {modelName: "Hat", fkColumn: "productId"},
-                shirt: {modelName: "Shirt", fkColumn: "productId"},
-              }
-            }
           ]
         }
 

@@ -6,18 +6,9 @@ TODO:
 - exec() refactoring and optimization.
 - presistanz refactoring to remove _() stuff.
 - selectDelete(), multiUpdate()
-- serializations: value-map type. Validation.
+- serializations: value-map type, date type. Validation.
 - unwanted field removal.
 - MSSQL support. (linux support for MSSQL is available now.)
-- When a table is used as a generic key-value store with different models, foreign keys referring to this table causing generation of
-    irrelevant toMany fields for each of the submodels. Moreover, if one the submodels have two references to the generic table pers.create()
-    throws "toMany field causing name collision error" for EVERY submodel. Investigate the issue and prepare a fix like "don't generate
-    toMany fields for these.".
-- Likewise, when pers throws because of multiple possible models exist for a a given fk, consider generating a bridge field only for those
-    models whose name is matching the generated bf name. For example, from a generic table that is used as key-value store who has multiple
-    sub models, pers cannot create bridge fields. But most of them are irrelevant anyway. If a submodel is ShipType, and Ship table has shipTypeId
-    column, there is no need to produce foreign keys for other XType models as they would be irrelevant and unncessarily forces the user
-    to define meaningless bridge fileds for models which they won't use anyway.
 - There is no way to escape curly braces in selectAlias(). Find a way.
 - Transaction options.
 - make getTransaction() callbacks so that the txOptions parameters can be ignored and callback fn can be the first param.
@@ -25,15 +16,19 @@ TODO:
 - ignoreTables documentation.
 - documentation references tests, but they changed, update.
 - test documenation change.
-- new bf and toMany name creation algorithm documentation.
+- new bf and toMany name creation algorithm documentation, pers doesn't throw upon failing autogen.
+- genericStorage documentation.
 - add a section about .group() into the documentation and explain why it's not working like the rest of library and requires selectAlias().
 - also put into docs that fields listed in the .selectAlias() don't map to the objects but become properties of the FROM object.
 
 changes:
+- Brigde field and toMany field generation completely revamped.
+- Persistanz no more throws for failing to autogenerate bridge and toMany fields.
+- genericStorage option for parent models with subclasses key.
 - ignoreTables config option.
 - Bridge field name generation now checks for _Code, _code and Code endings too.
 - BREAKING: toMany field names with "-ies" ending for tables whose names end with a "y".
-- Proper integration test suite, Travis-CI (for tests) and coveralls.
+- Proper integration test suite (not complete), Travis-CI (for tests) and coveralls.
 - Persistanz.getConfigSummary() lists ignored tables.
 - Code cleanup and minor adjustments.
 - FIX: if a model in config defined as a function, it was throwing due to some old code remained in v0.5 refactoring.
