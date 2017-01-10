@@ -179,11 +179,30 @@ Persistanz has a terrific documentation website where every feature is documente
 
 ## Version history
 
+## 0.6.0 2017-01-10
+
+- Persistanz no longer throws for failing to autogenerate bridge and toMany fields.
+- Brigde and toMany field generation completely revamped.
+- genericStorage option for parent models with subclasses key.
+- ignoreTables config option.
+- Bridge field name generation now checks for \_Code, \_code and Code endings too.
+- BREAKING: toMany field names with "-ies" ending for tables whose names end with a "y".
+- Proper integration test suite (not complete), Travis-CI (for tests) and coveralls.
+- Persistanz.getConfigSummary() lists ignored tables.
+- Code cleanup and minor adjustments.
+- FIX: if a model in config defined as a function, it was throwing due to some old code remained in v0.5 refactoring.
+- FIX: extend = false config option is now respected for auto-generated models too.
+- FIX: PersQuery.one() method now returns null instead of undefined when the query returns an empty set.
+- FIX: Inserts and updates weren't serializing discriminator and [de]serializing the pk.
+- FIX: Even if .selectAlias() called, query builder was adding '\*' to selects if no normal columns added to selects.
+- FIX: Using upgraded schemax (0.1.3) which fixes mysql reporting foreign keys from unrelated databases.
+- REMOVED: Persistanz.escape() was deprecated and now removed.
+
 ## 0.5.8 2017-01-03
 
 - saveAs(), insertAs() and their X methods now throw a more informative message when model name is missing.
 - .calc callback in streaming queries are now guaranteed to be called before the .end callback.
-- FIX: Transactions on PersQuery interface (query(), loadById() etc) didn't work used another connection from the pool.
+- FIX: Transactions on PersQuery interface didn't work as they wrongly used another connection from the pool.
 - FIX: Transactions were not issuing an automatic rollback for errors that didn't reach the database layer.
 - Upgraded schemax (0.1.2) is used now. This fixed the following 2 issues:
 - FIX: Postgres adapter was broken due to schemax not reporting pks correctly and auto-increment attribute at all.
