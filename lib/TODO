@@ -1,5 +1,4 @@
 TODO:
-- Enforce that column names cannot contain commas, table names neither commas nor dots. We split by comma everywhere.
 - getSql() on pers and persQuery. Deprecate getQuery() and replace it with getSql().
 - adapter refactoring needed. They still don't support callbacks.
 - map refactoring and optimization.
@@ -13,10 +12,8 @@ TODO:
 - Transaction options.
 - make getTransaction() callbacks so that the txOptions parameters can be ignored and callback fn can be the first param.
 - loadById() too, in callback mode, currently it is necessary to put the "select" argument.
-- ignoreTables documentation.
 - documentation references tests, but they changed, update.
 - test documenation change.
 - new bf and toMany name creation algorithm documentation, pers doesn't throw upon failing autogen.
-- genericStorage documentation.
 - add a section about .group() into the documentation and explain why it's not working like the rest of library and requires selectAlias().
 - also put into docs that fields listed in the .selectAlias() don't map to the objects but become properties of the FROM object.

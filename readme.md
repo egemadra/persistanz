@@ -13,14 +13,14 @@ It is written in javascript and works on node.js.
 > 3 lines of javascript is all there is to enjoy a fully functional ORM layer.
 
 ```javascript
-var Persistanz=require("persistanz"); //1
-var pers=new Persistanz("sqlite3:/path/to/your/db.sqlite"); //2
+var Persistanz = require("persistanz"); //1
+var pers = new Persistanz("sqlite3:/path/to/your/db.sqlite"); //2
 pers.create().then(function(){ //3  
 
   //all models are generated and can be used in CRUD operations.
   pers.loadById("Product", 42, null, function(err, product){
     console.log(product.name);
-    product.name="a different name";
+    product.name = "a different name";
     product.save();
   });
 
@@ -47,7 +47,6 @@ pers.create().then(function(){ //3
 * Has a handsome [documenation web site](http://persistanz.34bit.net/) which covers the full functionality.
 * [Has integration tests](http://persistanz.34bit.net/#tests)
 
-
 ## Is it good for me?
 
 This is a bit of an opinionated package that aims to simplify and leverage the common database usage scenarios. It expects to be able to understand the relations between tables by looking at the schema, so the more your schema makes sense, the more this library is useful to you and you write less code.
@@ -60,7 +59,6 @@ If you do any following, some or all parts of the library won't work, because ev
 - You do unusual stuff like referencing more than one table with the same foreign key, or referencing non-primary-key columns.<br />
 - You use composite primary and foreign keys.<br />
 - You do arbitrary and custom connections using JOINs not involving foreign keys and/or primary keys.<br />
-- Your table and column names contain commas or dots.
 </aside>
 
 Also, unlike some other ORM libraries, it expects you to know basic SQL as SQL building methods are very thin wrappers on actual SQL syntax and they resemble them significantly.
@@ -86,40 +84,38 @@ npm install sqlite3 --save
 ## Samples
 
 ```javascript
-var Pers=require("persistanz");
-var pers=new Pers("mysql://username:password@host/database");
+var Pers = require("persistanz");
+var pers = new Pers("mysql://username:password@host/database");
 
  //this call uses a callback, but promises can be used too:
-pers.create(function(err, r){
+pers.create(function(err, r) {
 
   //At this point, persistanz created a default model
   //for each of your tables. They are named after the tables
   //and can do CRUD operations:
-  var c=new pers.m.Customer();
-  c.name="zubi";
+  var c = new pers.m.Customer();
+  c.name = "zubi";
 
   //Repository style where whole thing is governed by a central repo:
   //This is an insert because c.id is not set.
   //No callback is given to save, so returns a promise, and we can chain:
   pers.save(c).
-    then(function(saveResult){
+    then(function(saveResult) {
       console.log(c); //{ name: 'zubi', id: 1 }
       console.log(saveResult);
       /* {  object: { name: 'zubi', id: 1 },
             status: 'saved',
             command: 'insert',
             lastInsertId: 1 } */
-      c.name="ege";
+      c.name = "ege";
       //This time, let's use save on object instance.
       //Generates an update query because c.id is set.
       return c.save();
-    }).then(function(saveResult)
-    {
+    }).then(function(saveResult) {
       console.log(c); //{ name: 'ege', id: 1 }
       console.log(saveResult); //... command: 'update', lastInsertId: 0
       return c.delete();
-    }).then (function(result)
-    {
+    }).then (function(result) {
       console.log(result); //status: 'deleted', ..., command: 'delete'
       console.log(pers.getQuery()); //DELETE FROM `Customer` WHERE `id` = 1
     }).catch(function(err){
@@ -130,13 +126,13 @@ pers.create(function(err, r){
 
 ```javascript
 //let's create a few records first...
-pers.m.Order.save({customerId:1, date:new Date()});
-pers.saveAs({customerId:1, date:new Date}, "Customer");
+pers.m.Order.save({customerId: 1, date: new Date()});
+pers.saveAs({customerId: 1, date: new Date}, "Customer");
 
 pers.query()
   .from("Order")
   .select("id, date, customer.*")
-  .where("{customer.id}=?", 1).
+  .where("{customer.id} = ?", 1).
   .limit(5)
   .exec()
   .then(function(rows){
@@ -152,8 +148,8 @@ pers.query()
 ```javascript
 //Concise form of the same. Clause ordering is not important.
 //Let's return a promise:
-var aPromise=pers.q()
-  .w("{customer.id}=?", 1)
+var aPromise = pers.q()
+  .w("{customer.id} = ?", 1)
   .s("id, date, customer.*")
   .f("Order")
   .l(5)
@@ -161,8 +157,8 @@ var aPromise=pers.q()
 
 //Same, but use model's static method.
 //Note that .from is missing, because it is "Order".
-var aPromise=pers.models.Order.q()
-  .w("{customer.id}=?", 1)
+var aPromise = pers.models.Order.q()
+  .w("{customer.id} = ?", 1)
   .s("id, date, customer.*")
   .l(5)
   .exec();
@@ -170,7 +166,7 @@ var aPromise=pers.models.Order.q()
 //also, many to many connections are allowed. Each customer object
 //in the resulting array has an orders field, which is an array,
 //containing zero or more Order objects.
-var aPromise=pers.q().f("Customer").s("id, name, orders.*").exec();
+var aPromise = pers.q().f("Customer").s("id, name, orders.*").exec();
 ```
 
 ## Documentation
@@ -178,6 +174,13 @@ var aPromise=pers.q().f("Customer").s("id, name, orders.*").exec();
 Persistanz has a terrific documentation website where every feature is documented with code samples. Head over to the [persistanz.34bit.net](http://persistanz.34bit.net)
 
 ## Version history
+
+## 0.7.0 2017-01-15
+
+- Commas and dots can be used in table and field names now.
+- .separator config option to change field separator to something other than dot.
+- Separator can be escaped with double backslashes in query building methods.
+- Methods like select, loadById, hydrate etc now accept a field list as an array too.
 
 ## 0.6.0 2017-01-10
 
