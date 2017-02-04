@@ -14,9 +14,9 @@ TODO:
 - loadById() too, in callback mode, currently it is necessary to put the "select" argument.
 - documentation references tests, but they changed, update.
 - test documenation change.
-- new bf and toMany name creation algorithm documentation, pers doesn't throw upon failing autogen.
 - add a section about .group() into the documentation and explain why it's not working like the rest of library and requires selectAlias().
 - also put into docs that fields listed in the .selectAlias() don't map to the objects but become properties of the FROM object.
 
 UPDATED:
 - FIX: Serialization default was used in update too, now only used in insert.
+- affix() for PersQuery.
