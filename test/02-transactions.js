@@ -607,7 +607,7 @@ describe("Same CRUD tests with transactions", function(done) {
           c = yield pers.loadById("Customer", id);
           assert(c === null, "There can't be a such customer.");
           try {
-            tx.rollback();
+            yield tx.rollback();
             assert("Should not have come here.");
           } catch (err) {
             assert(err.toString().includes("Transaction is closed"), "We should have tx closed error.");
@@ -712,7 +712,7 @@ describe("Same CRUD tests with transactions", function(done) {
           });
         });
 
-        it("hydrate without a corresponding row in db errors (callbacks)", function * () {
+        it("hydrate without a corresponding row in db errors (callbacks)", function (done) {
           var c = pers.cast({id: 2657}, "Customer");
           pers.getTransaction(null, function(err, tx){
             c.hydrateX(tx, "name", function(err, result){

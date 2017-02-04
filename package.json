@@ -19,6 +19,7 @@
   },
   "scripts": {
     "test": "nyc --reporter=html --reporter=text mocha --reporter spec --timeout 5000 --no-exit",
+    "pure-test": "mocha --reporter spec --timeout 5000 --no-exit",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "keywords": [

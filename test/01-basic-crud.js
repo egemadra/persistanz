@@ -587,7 +587,7 @@ describe("Basic CRUD without a configuration", function(done) {
           });
         });
 
-        it("hydrate without a corresponding row in db errors (callbacks)", function * () {
+        it("hydrate without a corresponding row in db errors (callbacks)", function (done) {
           var c = pers.cast({id: 2657}, "Customer");
           c.hydrate("name", function(err, result){
             assert(err.toString().includes("not found in the database"), "Should tell about the missing row.");
