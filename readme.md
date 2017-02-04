@@ -175,6 +175,14 @@ Persistanz has a terrific documentation website where every feature is documente
 
 ## Version history
 
+### 0.8.0 2017-02-04
+
+- .affix() method for PersQuery.
+- All async adapter API now accepts callbacks like the rest of the library.
+- Mysql and Postgres connect methods now tests the connection instead of throwing later when the connection is used for the first time.
+- FIX: Serialization default was used wrongly in update queries, now only used in insert.
+- Fix test suite errors to prevent "deprecated unhandled rejection" errors.
+
 ### 0.7.0 2017-01-15
 
 - Commas and dots can be used in table and field names now.
