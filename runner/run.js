@@ -14,5 +14,5 @@ const options = {
   const pers = new Persistanz(options);
   await pers.create();
   await pers.destroy();
-  
+    
 })();
