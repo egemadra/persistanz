@@ -73,10 +73,11 @@ Currently in beta stage. I am actively working on this project as I am currently
 npm install persistanz --save
 ```
 
-> You will also need to install one of the following database bindings: mysql, postgres, sqlite3:
+> You will also need to install one of the following database bindings: mysql, mysql2, postgres, sqlite3:
 
 ```
 npm install mysql --save
+npm install mysql2 --save
 npm install pg --save
 npm install sqlite3 --save
 ```
@@ -174,6 +175,10 @@ var aPromise = pers.q().f("Customer").s("id, name, orders.*").exec();
 Persistanz has a terrific documentation website where every feature is documented with code samples. Head over to the [persistanz.34bit.net](http://persistanz.34bit.net)
 
 ## Version history
+
+### 0.9.0 2022-04-16
+
+- Node mysql2 support, package upgrades
 
 ### 0.8.0 2017-02-04
 
